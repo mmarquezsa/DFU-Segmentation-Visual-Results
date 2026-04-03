@@ -28,14 +28,14 @@ Files follow the pattern `NNN_source_XXXX.png`, where:
 
 ## Dataset Context
 
-The images belong to the curated 2,245-image DFU corpus assembled from three public repositories:
+The images belong to a curated DFU corpus derived from three public wound-image repositories. The original pool of **2,845 images** was filtered through a diagnostic screening process in which wound-care experts reviewed each photograph and retained only those depicting diabetic foot ulcers (DFU-compatible). Non-DFU cases (pressure ulcers, surgical wounds, burns, etc.) were excluded. A subsequent quality-control step removed images with severe artifacts, inadequate resolution, or unusable masks, yielding a final corpus of **2,245 image–mask pairs**.
 
-| Source | Retained Images |
-|--------|----------------:|
-| FUSeg2021 | 1,180 |
-| WoundSeg/WSNet DFU subset | 886 |
-| Medetec Wound Database | 179 |
-| **Total** | **2,245** |
+| Source repository | Original | DFU-compatible | Excluded (non-DFU) | Retained after QC |
+|-------------------|:--------:|:--------------:|:-------------------:|:-----------------:|
+| Medetec Wound Database | 374 | 212 | 162 | 179 |
+| FUSeg2021 challenge dataset | 1,295 | 1,295 | 0 | 1,180 |
+| WoundSeg/WSNet-derived DFU subset | 1,176 | 893 | 283 | 886 |
+| **Total** | **2,845** | **2,400** | **445** | **2,245** |
 
 The 252 triplets shown here correspond to cases where an initial multi-model consensus pipeline flagged potential annotation discrepancies. Eight independently trained segmentation architectures (ConvNeXt-Base, SegFormer-B5, MaxViT, U-Net EfficientNet-B7, U-Net++ ResNet-50, DeepLabV3+ ResNet-50, WoundNetB7-CA, and SegFormer-CA) were used to identify candidate regions where the original expert masks and high-confidence model agreement diverged — indicating likely missed or over-annotated wound areas.
 
