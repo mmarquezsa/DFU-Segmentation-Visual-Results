@@ -16,7 +16,7 @@ Each image in `triplets/` shows three panels side by side:
 |-------|-------------|
 | **Left** | Original DFU photograph |
 | **Center** | Original ground-truth binary mask (expert annotation) |
-| **Right** | Consensus-corrected mask after model-assisted annotation refinement |
+| **Right** | Consensus-corrected mask after expert-reviewed, model-assisted annotation refinement. Pixels shown in **green** represent regions added or confirmed by expert consensus |
 
 ### Naming Convention
 
@@ -37,15 +37,20 @@ The images belong to the curated 2,245-image DFU corpus assembled from three pub
 | Medetec Wound Database | 179 |
 | **Total** | **2,245** |
 
-The 252 triplets shown here correspond to cases where the multi-model consensus correction pipeline detected annotation discrepancies between the original expert masks and the agreement of eight independently trained segmentation architectures (ConvNeXt-Base, SegFormer-B5, MaxViT, U-Net EfficientNet-B7, U-Net++ ResNet-50, DeepLabV3+ ResNet-50, WoundNetB7-CA, and SegFormer-CA). Corrections were applied only when high-confidence model agreement indicated likely missed or over-annotated wound regions, following a semi-automatic refinement protocol designed to reduce inter-annotator variability.
+The 252 triplets shown here correspond to cases where an initial multi-model consensus pipeline flagged potential annotation discrepancies. Eight independently trained segmentation architectures (ConvNeXt-Base, SegFormer-B5, MaxViT, U-Net EfficientNet-B7, U-Net++ ResNet-50, DeepLabV3+ ResNet-50, WoundNetB7-CA, and SegFormer-CA) were used to identify candidate regions where the original expert masks and high-confidence model agreement diverged — indicating likely missed or over-annotated wound areas.
+
+Critically, the model-proposed corrections were **not applied automatically**. Each flagged case was subsequently reviewed by **three wound-care experts**, who independently evaluated the candidate regions and reached a final consensus on which corrections were clinically justified. Only expert-validated corrections were retained in the final masks. In the right panel, regions shown in **green** represent pixels added through this expert consensus process, distinguishing them from the original annotation (white) in the center panel.
+
+This two-stage protocol — computational screening followed by expert adjudication — was designed to reduce inter-annotator variability while ensuring that all corrections reflect clinical judgment rather than purely algorithmic agreement.
 
 ## Purpose
 
 These visual results are provided as **supplementary material** for transparency and reproducibility. They allow readers to:
 
-1. Inspect the quality of original expert annotations alongside corrected masks.
-2. Assess the magnitude and location of consensus-driven corrections.
-3. Evaluate the clinical plausibility of the refinement process on a per-image basis.
+1. Inspect the original expert annotations alongside the expert-reviewed corrected masks.
+2. Assess the magnitude and location of corrections validated by the three-expert consensus.
+3. Identify the green-highlighted regions that were added through expert adjudication.
+4. Evaluate the clinical plausibility of the refinement process on a per-image basis.
 
 ## Related Repository
 
